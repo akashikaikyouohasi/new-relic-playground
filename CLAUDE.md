@@ -67,6 +67,12 @@ requirements.txt
 
 `rules/development-process.md` に従うこと。
 
+## Makefile ルール
+
+- セットアップが必要な作業（ツールのインストール・初期化など）は必ず `Makefile` のターゲットとして定義すること
+- 新しいセットアップ手順を追加した場合は `make setup` ターゲットにも反映すること
+- 利用可能なターゲットは `make help` で確認できる
+
 ## New Relic 設定の注意事項
 
 - **ライセンスキーは絶対にコミットしない**: 環境変数 `NEW_RELIC_LICENSE_KEY` で渡す

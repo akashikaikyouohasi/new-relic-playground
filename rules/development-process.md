@@ -30,13 +30,16 @@
 git clone <repository-url>
 cd new-relic-playground
 
-# 2. .env ファイルを作成
+# 2. 開発ツールのセットアップ（pre-commit フックの登録）
+make setup
+
+# 3. .env ファイルを作成
 cp .env.example .env
 
-# 3. .env に New Relic ライセンスキーを設定
+# 4. .env に New Relic ライセンスキーを設定
 # NEW_RELIC_LICENSE_KEY=your_license_key_here
 
-# 4. Docker Compose で起動
+# 5. Docker Compose で起動
 docker compose up --build
 ```
 
@@ -128,3 +131,29 @@ SELECT * FROM CustomEvent WHERE appName = 'new-relic-playground' SINCE 1 hour ag
 
 1. **パッケージが見つからない**: `requirements.txt` に追加して `docker compose build` を再実行
 2. **バージョン競合**: `pip install` のエラーメッセージで競合パッケージを特定し、バージョンを調整
+
+## コミット規約
+
+### pre-commit による自動チェック
+
+`make setup` を実行すると `pre-commit` フックが登録される。
+`git commit` 実行時に以下のチェックが自動で走る:
+
+- **ruff**: リントエラーがないかチェック
+- **ruff-format**: フォーマットが正しいかチェック
+
+チェックに失敗した場合はコミットがブロックされる。エラーを修正してから再度コミットすること。
+
+### `/commit` コマンドの使い方
+
+Claude Code の `/commit` コマンドを使うと、ステージ済みの変更を元に適切なコミットメッセージを自動生成してコミットできる。
+
+```bash
+# 変更をステージ
+git add <files>
+
+# Claude Code でコミット（コミットメッセージを自動生成）
+/commit
+```
+
+コミットメッセージは [Conventional Commits](https://www.conventionalcommits.org/) 形式（`feat:`, `fix:`, `docs:` など）を使用すること。
