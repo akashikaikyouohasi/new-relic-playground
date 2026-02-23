@@ -1,0 +1,82 @@
+# CLAUDE.md - プロジェクト指示書
+
+このファイルは Claude Code がプロジェクトを理解するための指示書である。
+
+## プロジェクト概要
+
+New Relic の主要機能を Python（FastAPI）で検証する playground プロジェクト。
+プロジェクト全体の構成・ドキュメント一覧は [README.md](README.md) を参照すること。
+
+## 技術スタック
+
+- **言語**: Python 3.12+
+- **Web フレームワーク**: FastAPI + uvicorn
+- **APM**: New Relic Python Agent (`newrelic` パッケージ)
+- **コンテナ**: Docker / Docker Compose
+- **テスト**: pytest
+- **リンター/フォーマッター**: ruff
+
+## 実装時のディレクトリ構成
+
+```
+app/
+├── main.py              # FastAPI アプリケーションのエントリポイント
+├── routers/             # API エンドポイント定義
+│   ├── health.py        # ヘルスチェック
+│   ├── apm.py           # APM 基本検証用
+│   ├── tracing.py       # 分散トレーシング検証用
+│   ├── errors.py        # エラートラッキング検証用
+│   └── custom.py        # カスタムイベント・メトリクス検証用
+├── services/            # ビジネスロジック
+├── utils/               # ユーティリティ
+└── config.py            # 設定管理
+
+tests/
+├── conftest.py
+└── test_*.py
+
+newrelic.ini             # New Relic Agent 設定ファイル
+Dockerfile
+docker-compose.yml
+.env.example             # 環境変数テンプレート
+requirements.txt
+```
+
+## 開発ルール
+
+### 仕様駆動開発
+
+1. 実装前に必ず `specs/` 配下の該当仕様書を確認すること
+2. 仕様書に定義されたエンドポイント・検証手順に従って実装すること
+3. 実装完了後は `specs/10-verification-checklist.md` のチェックリストを更新すること
+
+### コーディング規約
+
+`rules/coding-standards.md` に従うこと。主要ポイント:
+
+- PEP 8 準拠（ruff でフォーマット）
+- 型ヒントを必須とする
+- FastAPI の Depends を活用した依存性注入
+- Python 標準の logging モジュールで構造化ログを出力
+
+### アーキテクチャ
+
+`rules/architecture.md` に従うこと。
+
+### 開発プロセス
+
+`rules/development-process.md` に従うこと。
+
+## New Relic 設定の注意事項
+
+- **ライセンスキーは絶対にコミットしない**: 環境変数 `NEW_RELIC_LICENSE_KEY` で渡す
+- `newrelic.ini` にはプレースホルダーのみ記載し、実際のキーは `.env` ファイルで管理
+- `.env` ファイルは `.gitignore` に追加済みであること
+- New Relic Agent の起動は `newrelic-admin run-program` コマンドを使用
+
+## セキュリティルール
+
+- シークレット（API キー、ライセンスキー等）をソースコードにハードコードしない
+- `.env` ファイルをコミットしない（`.gitignore` で除外）
+- Docker イメージに機密情報を含めない（ビルド時の ARG ではなくランタイムの ENV を使用）
+- 外部 API 呼び出し時の URL はハードコードせず環境変数で管理
