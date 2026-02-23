@@ -6,6 +6,8 @@
    - prefix は Conventional Commits に従う（`feat`, `fix`, `docs`, `chore`, `refactor`, `test` など）
    - メッセージは日本語OK、簡潔に変更内容を表す一文にする
    - 例: `feat: ユーザー認証エンドポイントを追加`
-4. `git commit` する
+   - **メッセージは必ず1行で完結させること（改行を含めない）**
+   - **`Co-Authored-By` などの trailer は付けない**
+4. `git commit -m "メッセージ"` する（改行なしの `-m` 形式を使うこと）
 5. `git push` する
 6. `git status` でコミット・プッシュ成功を確認する

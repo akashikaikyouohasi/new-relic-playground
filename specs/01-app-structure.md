@@ -21,16 +21,19 @@ app/
 └── utils/
     └── __init__.py
 
-requirements.txt         # Python パッケージ一覧
+pyproject.toml           # パッケージ定義・依存管理（uv）
 ```
 
-### 依存パッケージ（requirements.txt）
+### 依存パッケージ（pyproject.toml）
+
+`pyproject.toml` の `[project] dependencies` で管理する。パッケージマネージャには uv を使用する。
 
 ```
 fastapi>=0.115.0
 uvicorn[standard]>=0.30.0
 newrelic>=10.0.0
 httpx>=0.27.0
+pydantic-settings>=2.0.0
 ```
 
 ## 検証用エンドポイント
@@ -137,4 +140,4 @@ async def health_check() -> dict[str, str]:
 - [ ] `GET /health` が `{"status": "ok", ...}` を返す
 - [ ] `GET /` が API 概要情報を返す
 - [ ] `GET /docs` で OpenAPI ドキュメントが表示される
-- [ ] `requirements.txt` に必要なパッケージが定義されている
+- [ ] `pyproject.toml` に必要なパッケージが定義されている

@@ -20,7 +20,7 @@ docker-compose.yml
 
 - **ベースイメージ**: `python:3.12-slim`
 - **作業ディレクトリ**: `/app`
-- **依存関係インストール**: `requirements.txt` から pip install
+- **依存関係インストール**: `pyproject.toml` から uv sync
 - **起動コマンド**: `newrelic-admin run-program uvicorn app.main:app --host 0.0.0.0 --port 8000`
 
 ### 実装ガイド
@@ -28,14 +28,16 @@ docker-compose.yml
 ```dockerfile
 FROM python:3.12-slim
 
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+
 WORKDIR /app
 
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+COPY pyproject.toml uv.lock ./
+RUN uv sync --frozen --no-dev --no-install-project
 
 COPY . .
 
-CMD ["newrelic-admin", "run-program", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uv", "run", "newrelic-admin", "run-program", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
 ## docker-compose.yml
@@ -87,6 +89,7 @@ __pycache__
 *.pyc
 .pytest_cache
 .ruff_cache
+.venv
 ```
 
 ## .gitignore

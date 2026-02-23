@@ -10,7 +10,10 @@
       "Bash(git log*)",
       "Bash(git diff*)",
       "Bash(git show*)",
-      "Bash(git branch*)"
+      "Bash(git branch*)",
+      "Bash(git add *)",
+      "Bash(uv *)",
+      "Bash(uv run *)"
     ]
   }
 }
