@@ -1,0 +1,12 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    env_file: # 中身をまとめてコンテナに読み込む。機密情報向け
+      - .env
+    environment: # 個別に環境変数を指定する。固定の設定
+      - NEW_RELIC_CONFIG_FILE=newrelic.ini
+    volumes:
+      - .:/app
+    restart: unless-stopped # 基本はDocker デーモン起動時に復活するが、docker stop で手動停止したら復活しない

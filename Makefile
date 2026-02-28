@@ -1,4 +1,4 @@
-.PHONY: setup lint format help
+.PHONY: setup lint format test up down logs help
 
 help: ## 利用可能なコマンドを表示
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-15s\033[0m %s\n", $$1, $$2}'
@@ -12,3 +12,15 @@ lint: ## ruff で lint を実行
 
 format: ## ruff で format を実行
 	uv run ruff format .
+
+test: ## pytest でテストを実行
+	uv run pytest -v
+
+up: ## Docker Compose でアプリを起動
+	docker compose up --build -d
+
+down: ## Docker Compose でアプリを停止
+	docker compose down
+
+logs: ## Docker Compose のログを表示
+	docker compose logs -f app
