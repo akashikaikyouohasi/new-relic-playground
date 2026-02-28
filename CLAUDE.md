@@ -59,6 +59,7 @@ requirements.txt
 - 型ヒントを必須とする
 - FastAPI の Depends を活用した依存性注入
 - Python 標準の logging モジュールで構造化ログを出力
+- 実装完了後、コミット前に `uv run ruff format . && uv run ruff check --fix .` を実行すること
 
 ### アーキテクチャ
 
