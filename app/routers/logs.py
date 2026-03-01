@@ -29,8 +29,10 @@ async def structured_logs() -> dict:
         "duration_ms": 45,
     }
     logger.info(
-        "User action recorded",
-        extra=attributes,
+        "User action recorded user_id=%s action=%s duration_ms=%d",
+        attributes["user_id"],
+        attributes["action"],
+        attributes["duration_ms"],
     )
     return {
         "status": "ok",
