@@ -18,6 +18,7 @@
 | 08 | [08-logs-in-context.md](08-logs-in-context.md) | Logs in Context の検証仕様 | 推奨 | 03 |
 | 09 | [09-custom-events-metrics.md](09-custom-events-metrics.md) | カスタムイベント・メトリクスの検証仕様 | 推奨 | 03 |
 | 10 | [10-verification-checklist.md](10-verification-checklist.md) | 総合検証チェックリスト | - | 全仕様 |
+| 11 | [11-architecture-diagram.md](11-architecture-diagram.md) | 構成図 | 推奨 | 全仕様 |
 
 ## 実装順序と依存関係
 

@@ -73,6 +73,14 @@ requirements.txt
 - テンプレート: `decisions/TEMPLATE.md` に従う
 - 後から判断基準の妥当性を検証できるよう、背景・選択肢・決定理由を必ず記載すること
 
+### 構成図
+
+`rules/architecture-diagram.md` に従うこと。主要ポイント:
+
+- 構成図は `docs/architecture.drawio` で管理する（draw.io 形式）
+- 仕様書（specs/）の追加・変更時に構成図も更新すること
+- 内部（Docker コンテナ）と外部コンポーネントを分離して描画する
+
 ### 開発プロセス
 
 `rules/development-process.md` に従うこと。
