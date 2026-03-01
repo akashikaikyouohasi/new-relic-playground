@@ -1,4 +1,4 @@
-.PHONY: setup lint format test up down logs help
+.PHONY: setup lint format test up down logs smoke help
 
 help: ## 利用可能なコマンドを表示
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-15s\033[0m %s\n", $$1, $$2}'
@@ -24,3 +24,6 @@ down: ## Docker Compose でアプリを停止
 
 logs: ## Docker Compose のログを表示
 	docker compose logs -f app
+
+smoke: ## 対話的にエンドポイントをテスト
+	bash scripts/smoke_test.sh
