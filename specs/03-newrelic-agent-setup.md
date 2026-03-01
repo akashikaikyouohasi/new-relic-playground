@@ -13,8 +13,7 @@ New Relic Python Agent をアプリケーションに導入し、基本的なデ
 # アプリケーション名（New Relic UI に表示される名前）
 app_name = new-relic-playground
 
-# ライセンスキー（環境変数から取得）
-license_key = %(NEW_RELIC_LICENSE_KEY)s
+# ライセンスキーは環境変数 NEW_RELIC_LICENSE_KEY から自動取得される
 
 # 分散トレーシングを有効化
 distributed_tracing.enabled = true

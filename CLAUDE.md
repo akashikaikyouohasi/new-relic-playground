@@ -50,6 +50,7 @@ requirements.txt
 2. 仕様書が存在しない機能のコードを書いてはならない
 3. 仕様書に定義されたエンドポイント・検証手順に従って実装すること
 4. 実装完了後は `specs/10-verification-checklist.md` のチェックリストを更新すること
+5. 既存の実装を変更した場合は、関連する `specs/` 配下の仕様書も同時に更新すること
 
 ### コーディング規約
 
@@ -85,7 +86,7 @@ requirements.txt
 ## New Relic 設定の注意事項
 
 - **ライセンスキーは絶対にコミットしない**: 環境変数 `NEW_RELIC_LICENSE_KEY` で渡す
-- `newrelic.ini` にはプレースホルダーのみ記載し、実際のキーは `.env` ファイルで管理
+- `newrelic.ini` にはライセンスキーを記載しない（環境変数 `NEW_RELIC_LICENSE_KEY` から自動取得）
 - `.env` ファイルは `.gitignore` に追加済みであること
 - New Relic Agent の起動は `newrelic-admin run-program` コマンドを使用
 
